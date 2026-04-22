@@ -43,7 +43,7 @@ Process
 6. Format each comment body:
 
    ```
-   **[SEVERITY] Title** (confidence: X)
+   **[SEVERITY] Title**
 
    Why it matters.
 
