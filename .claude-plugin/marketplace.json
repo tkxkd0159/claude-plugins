@@ -10,7 +10,10 @@
   "plugins": [
     {
       "name": "jdev",
-      "source": "./plugins/jdev",
+      "source": {
+        "source": "url",
+        "url": "https://github.com/tkxkd0159/allrounder.git"
+      },
       "description": "Useful utilities for programming and development",
       "author": {
         "name": "Jaeseung Lee"
