@@ -1,0 +1,35 @@
+{
+  "name": "allrounder",
+  "version": "0.1.0",
+  "description": "Useful utilities for programming and development.",
+  "author": {
+    "name": "Jaeseung Lee",
+    "email": "41176085+tkxkd0159@users.noreply.github.com",
+    "url": "https://github.com/tkxkd0159"
+  },
+  "homepage": "https://github.com/tkxkd0159/allrounder",
+  "repository": "https://github.com/tkxkd0159/allrounder",
+  "license": "MIT",
+  "keywords": [
+    "utils",
+    "programming",
+    "development",
+    "code-review",
+    "github"
+  ],
+  "skills": "./skills/",
+  "interface": {
+    "displayName": "Allrounder",
+    "shortDescription": "Programming and development utility skills.",
+    "longDescription": "Allrounder bundles practical Codex skills for programming workflows, including code review and posting validated GitHub PR review comments.",
+    "developerName": "Jaeseung Lee",
+    "category": "Coding",
+    "capabilities": [
+      "Interactive",
+      "Read",
+      "Write"
+    ],
+    "websiteURL": "https://github.com/tkxkd0159/allrounder",
+    "brandColor": "#2563EB"
+  }
+}

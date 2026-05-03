@@ -15,6 +15,18 @@
         "authentication": "ON_INSTALL"
       },
       "category": "Finance"
+    },
+    {
+      "name": "allrounder",
+      "source": {
+        "source": "local",
+        "path": "./plugins/allrounder"
+      },
+      "policy": {
+        "installation": "AVAILABLE",
+        "authentication": "ON_INSTALL"
+      },
+      "category": "Work"
     }
   ]
 }

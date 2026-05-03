@@ -1,0 +1,9 @@
+{
+  "name": "allrounder",
+  "version": "0.1.0",
+  "description": "Useful utilities for programming and development",
+  "author": {
+    "name": "Jaeseung Lee"
+  },
+  "keywords": ["utils", "programming", "development"]
+}

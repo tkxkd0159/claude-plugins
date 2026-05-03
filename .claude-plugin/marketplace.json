@@ -9,7 +9,7 @@
   },
   "plugins": [
     {
-      "name": "jdev",
+      "name": "allrounder",
       "source": {
         "source": "url",
         "url": "https://github.com/tkxkd0159/allrounder.git"
