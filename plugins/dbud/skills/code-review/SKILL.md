@@ -46,10 +46,11 @@ Review the current branch or PR against a base branch with adversarial, evidence
 5. Validate every surviving finding against the current code and diff; drop anything the cited range does not support. Dedup overlapping findings, keeping the strongest severity/confidence.
 
 6. Report in this order:
-   - Executive summary: base, merge-base SHA, changed-file count, blockers, residual risks
+   - Review range: `<merge-base>..<HEAD>` resolved to short SHAs
+   - Verdict: exactly one of `ready to approve`, `ready after fixes`, or `not ready` — one line, naming the blockers if any
    - Findings: title, `SEV/CONF`, `file:line`, failure mode, fix
    - Cross-cutting risks, if any
-   - Approval: exactly one of `ready to approve`, `ready after fixes`, or `not ready`
+   - Residual risks: plausible-but-unverified concerns, if any
 
 7. If `--comment` is set, gate posting through **Posting** below — the only path that writes to GitHub, and only after explicit user approval.
 
@@ -77,6 +78,8 @@ After the report, answer user follow-ups conversationally:
 - `high`: likely production failure or serious regression
 - `medium`: real bug under a plausible edge case
 - `low`: non-trivial issue worth fixing, not a blocker
+
+A **blocker** is a finding that makes the change unsafe to merge as-is — `critical` or `high` by default, a `medium` only when its edge case is plausible in practice; `low` is never a blocker.
 
 ## Confidence
 
