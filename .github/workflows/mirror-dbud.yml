@@ -1,0 +1,44 @@
+name: Mirror dbud plugin
+
+on:
+  push:
+    branches: [main]
+    paths: ['plugins/dbud/**']
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: mirror-dbud
+  cancel-in-progress: false
+
+jobs:
+  mirror:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v6
+        with:
+          fetch-depth: 0            # git subtree split must see full history
+          persist-credentials: false  # don't leave a GITHUB_TOKEN extraheader that would hijack the cross-repo push
+
+      - name: Mint bot token
+        id: token
+        uses: actions/create-github-app-token@v3
+        with:
+          app-id: ${{ vars.PUBOT_APP_ID }}
+          private-key: ${{ secrets.PUBOT_PRIVATE_KEY }}
+          owner: tkxkd0159
+          repositories: dbud
+
+      - name: Split & push
+        env:
+          APP_TOKEN: ${{ steps.token.outputs.token }}
+        run: |
+          set -euo pipefail
+          git config user.email "289906227+jsl-pubot[bot]@users.noreply.github.com"  # fallback identity only; subtree split keeps each commit's original author
+          git config user.name  "jsl-pubot[bot]"
+          SPLIT=$(git subtree split --prefix=plugins/dbud HEAD)
+          test -n "$SPLIT" || { echo "subtree split produced no commit; aborting (empty refspec would delete the branch)"; exit 1; }
+          echo "Mirroring $SPLIT -> tkxkd0159/dbud@main"
+          git push "https://x-access-token:${APP_TOKEN}@github.com/tkxkd0159/dbud.git" "$SPLIT:refs/heads/main"
