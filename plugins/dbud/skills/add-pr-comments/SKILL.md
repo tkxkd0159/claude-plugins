@@ -36,7 +36,7 @@ Post validated code review findings from the current review as a GitHub PR revie
    - Payload fields:
      - `commit_id`: HEAD commit SHA from step 1
      - `event`: `APPROVE` for `ready to approve`, otherwise `REQUEST_CHANGES`
-     - `body`: one-sentence TL;DR of the PR's overall health
+     - `body`: a short, plain-language summary of how the PR looks overall — the gist you'd give a teammate, not a formal report
      - `comments`: line-anchored comments, each with:
        - `path`: relative file path from repo root
        - `line`: line number, or range end line
@@ -44,17 +44,18 @@ Post validated code review findings from the current review as a GitHub PR revie
        - `side`: `RIGHT`
        - `body`: formatted finding comment
 
-7. **Format each comment body.**
+7. **Write each comment like a human reviewer, not a linter.**
 
-   ```markdown
-   **[SEVERITY] Title**
+   Talk to the author like a teammate. Lead with the problem in plain language, use contractions, and ask a question when you're genuinely unsure. Vary your openings — don't start every comment the same way. One or two sentences is usually enough; don't pad, and drop the rigid template and bracketed severity tags.
 
-   Why it matters.
+   - Signal severity with words, not tags: prefix `nit:` or `minor:` for small stuff; for a blocker, just say it's a blocker and why.
+   - Point to a fix, but phrase it as a suggestion — "Could we...?", "Maybe pull this into...", "Worth guarding against X here?"
+   - This applies in every review language (step 2): write how a person actually talks, not a stiff formal translation.
 
-   **Recommended fix:** actionable fix
-   ```
-
-   Use severity values `CRITICAL`, `HIGH`, `MEDIUM`, or `LOW`.
+   Examples:
+   - *Blocker:* "SQL injection on `name` here — it's concatenated straight into the query, so a crafted value runs arbitrary SQL. Can we switch to a parameterized query? This one's a blocker."
+   - *Medium:* "`lib/date.js` already exports a `formatDate()` that does this — worth importing it instead so we don't keep two copies in sync?"
+   - *Nit:* "nit: this `reduce` could just be `.flat()`."
 
 8. **Post the review.**
    - Send the payload with `gh api ... --input <payload-file>`.
